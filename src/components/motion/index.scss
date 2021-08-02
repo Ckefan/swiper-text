@@ -1,0 +1,50 @@
+/** @format */
+
+.motion-warp {
+  display: flex;
+  align-items: center;
+  .textarea {
+    width: 45%;
+    min-height: 50vh;
+    max-height: 80vh;
+    border: 1px solid rgb(155, 155, 155);
+    padding: 10px;
+    overflow: auto;
+    font-size: 14px;
+    color: #fff;
+    text-align: left;
+    background: rgb(40, 44, 52);
+    resize: none;
+    white-space: pre-wrap;
+    font-size: 24px;
+  }
+
+  .typed-cursor {
+    opacity: 1;
+    animation: typedjsBlink 0.7s infinite;
+    -webkit-animation: typedjsBlink 0.7s infinite;
+    animation: typedjsBlink 0.7s infinite;
+  }
+  @keyframes typedjsBlink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes typedjsBlink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .typed-fade-out {
+    opacity: 0;
+    transition: opacity 0.25s;
+    -webkit-animation: 0;
+    animation: 0;
+  }
+}

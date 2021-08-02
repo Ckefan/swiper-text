@@ -22,21 +22,24 @@ function App() {
         licenseKey={'YOUR_KEY_HERE'}
         navigation
         navigationBarColor={['#ff00ff']}
-        sectionsColor={['#000', 'transparent', 'transparent']}
-        onLeave={() => {}}
+        sectionsColor={['#000', 'transparent', '#000', 'transparent']}
+        onLeave={() => { }}
+        
         scrollingSpeed={1000} /* Options here */
-        render={({ state, fullpageApi }) => {
+        render={({ state, fullpageApi, a, b }) => {
+          console.log(state && state.destination?.index)
           return (
             <ReactFullpage.Wrapper>
               <div className='section'>
-                <Motion></Motion>
-              </div>
-              <div className='section'>
                 <CustomTitle></CustomTitle>
               </div>
+
               <div className='section'>
                 <SwiperText textList={texts}></SwiperText>
                 <CarouselText texts={texts}></CarouselText>
+              </div>
+              <div className='section'>
+                <Motion index={state.destination?.index}></Motion>
               </div>
               <div className='section'>
                 <TriangleLine></TriangleLine>
