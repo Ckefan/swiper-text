@@ -1,0 +1,26 @@
+/** @format */
+.ct-carousel-2 {
+  margin: 100px 0;
+  width: 100vw;
+  height: 202px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0px 0 30px 30px #f5f5f5;
+  .ct-carousel-warp {
+    position: absolute;
+    top: 131.5px;
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+    transition: all 1.5s ease-in-out;
+    .ct-carousel-Text {
+      font-size: 44px;
+      line-height: 62px;
+      &.active {
+        line-height: 78px;
+        font-size: 56px;
+        font-weight: 600;
+      }
+    }
+  }
+}
