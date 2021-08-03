@@ -1,17 +1,19 @@
 /** @format */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 const ThreePosman = ({ index }) => {
+  const [lock, setlock] = useState(false)
   let container, clock, gui, mixer, actions, activeAction, previousAction
   let camera, scene, renderer, model, face
 
   const api = { state: 'Walking' }
 
   useEffect(() => {
-    if (index === 3) {
+    if (index === 3 && !lock) {
+      setlock(true)
       init()
       animate()
     }
@@ -44,20 +46,6 @@ const ThreePosman = ({ index }) => {
     const dirLight = new THREE.DirectionalLight(0xffffff)
     dirLight.position.set(0, 20, 10)
     scene.add(dirLight)
-
-    // ground
-
-    const mesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(2000, 2000),
-      new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false })
-    )
-    mesh.rotation.x = -Math.PI / 2
-    scene.add(mesh)
-
-    const grid = new THREE.GridHelper(200, 40, 0x000000, 0x000000)
-    grid.material.opacity = 0.2
-    grid.material.transparent = true
-    scene.add(grid)
 
     // model
     const loader = new GLTFLoader().setPath('')
