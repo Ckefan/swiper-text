@@ -5,6 +5,7 @@ import SwiperText from './components/swiperText'
 import CustomTitle from './components/customTitle'
 import TriangleLine from './components/triangleLine'
 import Motion from './components/motion'
+import ThreePosman from './components/threePosman'
 import ReactFullpage from '@fullpage/react-fullpage'
 
 import './App.css'
@@ -23,8 +24,7 @@ function App() {
         navigation
         navigationBarColor={['#ff00ff']}
         sectionsColor={['#000', 'transparent', '#000', 'transparent']}
-        onLeave={() => { }}
-        
+        onLeave={() => {}}
         scrollingSpeed={1000} /* Options here */
         render={({ state, fullpageApi, a, b }) => {
           console.log(state && state.destination?.index)
@@ -40,6 +40,9 @@ function App() {
               </div>
               <div className='section'>
                 <Motion index={state.destination?.index}></Motion>
+              </div>
+              <div className='section'>
+                <ThreePosman index={state.destination?.index}></ThreePosman>
               </div>
               <div className='section'>
                 <TriangleLine></TriangleLine>

@@ -11,7 +11,6 @@ const Motion = ({ index }) => {
   useEffect(() => {
     if (index === 2 && !lock) {
       setLock(true)
-      console.log(123123)
       const options = {
         strings: [
           `const ctx = this.ele.getContext('2d')
@@ -85,7 +84,6 @@ drawFeet(t) {
     }
 
     const onKeySpace = (e) => {
-      console.log(typed)
       if (e.keyCode === 13 && index === 2) {
         typed.toggle()
         step.current === 1 &&

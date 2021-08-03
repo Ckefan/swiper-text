@@ -63,6 +63,7 @@
     "three": "^0.131.1",
     "three-orbitcontrols": "^2.110.3",
     "ts-pnp": "1.2.0",
+    "typed.js": "^2.0.12",
     "url-loader": "4.1.1",
     "web-vitals": "^1.1.2",
     "webpack": "4.44.2",
