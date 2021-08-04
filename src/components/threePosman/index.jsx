@@ -36,6 +36,7 @@ const ThreePosman = ({ index }) => {
     scene.background = new THREE.Color(0xe0e0e0)
     scene.fog = new THREE.Fog(0xe0e0e0, 20, 100)
 
+    // 声明时钟
     clock = new THREE.Clock()
 
     // 设置灯光
@@ -47,11 +48,12 @@ const ThreePosman = ({ index }) => {
     dirLight.position.set(0, 20, 10)
     scene.add(dirLight)
 
-    // model
+    // 导入模型
     const loader = new GLTFLoader().setPath('')
     loader.load(
       'RobotExpressive.glb',
       function (gltf) {
+        console.log(gltf)
         model = gltf.scene
         scene.add(model)
 
@@ -86,6 +88,7 @@ const ThreePosman = ({ index }) => {
 
     gui = new GUI()
 
+    // 声明特定对象的动画播放器
     mixer = new THREE.AnimationMixer(model)
 
     actions = {}
@@ -101,7 +104,7 @@ const ThreePosman = ({ index }) => {
       }
     }
 
-    // states
+    // 设置状态
 
     const statesFolder = gui.addFolder('States')
 
@@ -113,14 +116,13 @@ const ThreePosman = ({ index }) => {
 
     statesFolder.open()
 
-    // emotes
+    // 设置动作
 
     const emoteFolder = gui.addFolder('Emotes')
 
     function createEmoteCallback(name) {
       api[name] = function () {
         fadeToAction(name, 0.2)
-
         mixer.addEventListener('finished', restoreState)
       }
 
@@ -139,7 +141,7 @@ const ThreePosman = ({ index }) => {
 
     emoteFolder.open()
 
-    // expressions
+    // 设置表情
 
     face = model.getObjectByName('Head_4')
 
@@ -158,6 +160,7 @@ const ThreePosman = ({ index }) => {
     expressionFolder.open()
   }
 
+  // 执行动画
   function fadeToAction(name, duration) {
     previousAction = activeAction
     activeAction = actions[name]
@@ -182,8 +185,7 @@ const ThreePosman = ({ index }) => {
   }
 
   function animate() {
-    const dt = clock.getDelta()
-
+    const dt = clock.getDelta() //获取两帧的时间间隔
     if (mixer) mixer.update(dt)
 
     requestAnimationFrame(animate)

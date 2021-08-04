@@ -52,6 +52,7 @@ drawFeet(t) {
   )
 
   ctx.save()
+  // 前脚
   <font color="#00ff2b">ctx.translate(Math.cos(t) * -50, Math.sin(t) > 0 ? Math.sin(t) * -35 : 0)
   t < Math.PI &&  ctx.rotate(((Math.sin(t) * Math.PI) / 180) * -5)</font>
 
@@ -59,12 +60,13 @@ drawFeet(t) {
   ctx.restore()
 
   ctx.save()
+   // 后脚
   <font color="#00ff2b">ctx.translate(
     Math.cos(t + Math.PI) * -50,
     Math.sin(t + Math.PI) > 0 ? Math.sin(t + Math.PI) * -35 : 0
   )</font>
 
-  t > Math.PI && ctx.rotate(((Math.sin(t + Math.PI) * Math.PI) / 180) * -5)
+  if(t > Math.PI) ctx.rotate(((Math.sin(t + Math.PI) * Math.PI) / 180) * -5)
 
   ctx.fill(foot)
   ctx.restore()
@@ -80,7 +82,7 @@ drawFeet(t) {
       setTimeout(() => {
         step.current = 1
         typed.toggle()
-      }, 6500)
+      }, 7500)
     }
 
     const onKeySpace = (e) => {
@@ -90,13 +92,13 @@ drawFeet(t) {
           setTimeout(() => {
             step.current = 2
             typed.toggle()
-          }, 11000)
+          }, 12900)
 
         step.current === 2 &&
           setTimeout(() => {
             step.current = 3
             typed.toggle()
-          }, 22000)
+          }, 25000)
       }
     }
     //空格暂停
