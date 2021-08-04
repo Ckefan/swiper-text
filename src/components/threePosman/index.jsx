@@ -4,9 +4,17 @@ import React, { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 const ThreePosman = ({ index }) => {
   const [lock, setlock] = useState(false)
-  let container, clock, gui, mixer, actions, activeAction, previousAction
+  let container,
+    clock,
+    gui,
+    mixer,
+    actions,
+    activeAction,
+    previousAction,
+    orbitControls
   let camera, scene, renderer, model, face
 
   const api = { state: 'Walking' }
@@ -71,6 +79,11 @@ const ThreePosman = ({ index }) => {
     renderer.outputEncoding = THREE.sRGBEncoding
     container.appendChild(renderer.domElement)
 
+    // 轨道控制
+    orbitControls = new OrbitControls(camera, renderer.domElement)
+    orbitControls.target = new THREE.Vector3(0, 0, 0) //控制焦点
+    orbitControls.autoRotate = false //将自动旋转关闭
+
     window.addEventListener('resize', onWindowResize)
   }
 
@@ -105,11 +118,8 @@ const ThreePosman = ({ index }) => {
     }
 
     // 设置状态
-
     const statesFolder = gui.addFolder('States')
-
     const clipCtrl = statesFolder.add(api, 'state').options(states)
-
     clipCtrl.onChange(function () {
       fadeToAction(api.state, 0.5)
     })
@@ -117,9 +127,7 @@ const ThreePosman = ({ index }) => {
     statesFolder.open()
 
     // 设置动作
-
     const emoteFolder = gui.addFolder('Emotes')
-
     function createEmoteCallback(name) {
       api[name] = function () {
         fadeToAction(name, 0.2)
@@ -128,23 +136,18 @@ const ThreePosman = ({ index }) => {
 
       emoteFolder.add(api, name)
     }
-
     function restoreState() {
       mixer.removeEventListener('finished', restoreState)
 
       fadeToAction(api.state, 0.2)
     }
-
     for (let i = 0; i < emotes.length; i++) {
       createEmoteCallback(emotes[i])
     }
-
     emoteFolder.open()
 
     // 设置表情
-
     face = model.getObjectByName('Head_4')
-
     const expressions = Object.keys(face.morphTargetDictionary)
     const expressionFolder = gui.addFolder('Expressions')
 
@@ -188,6 +191,7 @@ const ThreePosman = ({ index }) => {
     const dt = clock.getDelta() //获取两帧的时间间隔
     if (mixer) mixer.update(dt)
 
+    orbitControls.update(dt)
     requestAnimationFrame(animate)
 
     renderer.render(scene, camera)
