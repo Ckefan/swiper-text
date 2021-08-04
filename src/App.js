@@ -4,6 +4,8 @@ import CarouselText from './components/carouselText'
 import SwiperText from './components/swiperText'
 import CustomTitle from './components/customTitle'
 import TriangleLine from './components/triangleLine'
+import End from './components/end'
+
 import Motion from './components/motion'
 import ThreePosman from './components/threePosman'
 import ReactFullpage from '@fullpage/react-fullpage'
@@ -23,7 +25,7 @@ function App() {
         licenseKey={'YOUR_KEY_HERE'}
         navigation
         navigationBarColor={['#ff00ff']}
-        sectionsColor={['#000', 'transparent', '#000', 'transparent']}
+        sectionsColor={['#000', 'transparent', '#000', 'transparent', '#000']}
         onLeave={() => {}}
         scrollingSpeed={1000} /* Options here */
         render={({ state, fullpageApi, a, b }) => {
@@ -45,7 +47,8 @@ function App() {
                 <ThreePosman index={state.destination?.index}></ThreePosman>
               </div>
               <div className='section'>
-                <TriangleLine></TriangleLine>
+                <End index={state.destination?.index}></End>
+                {/* <TriangleLine></TriangleLine> */}
               </div>
             </ReactFullpage.Wrapper>
           )
